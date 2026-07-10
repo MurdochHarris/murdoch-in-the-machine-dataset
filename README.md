@@ -135,9 +135,9 @@ See [LICENSE](LICENSE) for the full text. Trademarks or third-party marks visibl
 
 ---
 
-## AI assistants (ChatGPT / Gemini / Grok)
+## AI assistants — recreate Murdoch’s likeness
 
-Ready-to-upload packs live in [`ai-assistants/`](ai-assistants/):
+Packs in [`ai-assistants/`](ai-assistants/) turn this dataset into **likeness kits** (reference URLs + visual anchors + prompts) for consistent Murdoch generation and training:
 
 | Platform | What to use |
 |----------|-------------|
@@ -145,13 +145,11 @@ Ready-to-upload packs live in [`ai-assistants/`](ai-assistants/):
 | **Gemini** Gem | `ai-assistants/gemini/GEM_INSTRUCTIONS.md` + upload `shared/KNOWLEDGE.md` |
 | **Grok** skill | copy `ai-assistants/grok/SKILL.md` → `~/.grok/skills/murdoch-dataset/` |
 
-Regenerate knowledge after new plates:
-
 ```bash
-python3 ai-assistants/build_knowledge.py
+python3 ai-assistants/build_knowledge.py   # after new plates; re-upload KNOWLEDGE.md
 ```
 
-See [ai-assistants/README.md](ai-assistants/README.md) for step-by-step upload instructions.
+See [ai-assistants/README.md](ai-assistants/README.md).
 
 ---
 

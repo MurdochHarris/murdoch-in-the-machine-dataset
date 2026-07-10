@@ -1,99 +1,85 @@
-# AI assistant packs — Murdoch in the Machine
+# AI assistant packs — recreate Murdoch’s likeness
 
-Files in this folder are ready to paste or upload into **ChatGPT**, **Gemini**, and **Grok**.  
-They describe the public-domain Murdoch dataset so an assistant can recommend plates, quote captions, and return stable image URLs.
+These files turn the dataset into **likeness kits** for ChatGPT, Gemini, and Grok: reference plates, visual anchors, and prompts so people can generate or train a **consistent Murdoch**, not just browse a gallery.
 
 ```
 ai-assistants/
-├── README.md                 ← you are here
+├── README.md
+├── build_knowledge.py
 ├── shared/
-│   ├── KNOWLEDGE.md          ← full plate index + captions (primary upload)
-│   ├── INDEX.md              ← short table of id / title / URL
-│   └── manifest.json         ← machine copy of the repo manifest
+│   ├── KNOWLEDGE.md      ← upload this (plates + captions + URLs)
+│   ├── INDEX.md
+│   └── manifest.json
 ├── chatgpt/
-│   ├── INSTRUCTIONS.md       ← Custom GPT system instructions
+│   ├── INSTRUCTIONS.md
 │   └── CONVERSATION_STARTERS.md
 ├── gemini/
-│   └── GEM_INSTRUCTIONS.md   ← Gemini Gem instructions
+│   └── GEM_INSTRUCTIONS.md
 └── grok/
-    └── SKILL.md              ← Grok Build / agent skill
+    └── SKILL.md
 ```
 
-**Source of truth remains the GitHub repo.** After you add plates (`sync_blogger.py` / new media), regenerate knowledge:
+After new plates:
 
 ```bash
 python3 ai-assistants/build_knowledge.py
 ```
 
-Then re-upload `shared/KNOWLEDGE.md` (and `manifest.json` if you use it) on each platform.
+Re-upload `shared/KNOWLEDGE.md` on ChatGPT/Gemini when it changes.
+
+---
+
+## What a good answer looks like
+
+Assistants should return a **likeness kit**:
+
+1. **Reference plates** — raw GitHub image URLs (face locks + vibe matches)  
+2. **Visual anchors** — what to keep constant across gens  
+3. **Prompts** — identity test + optional scene  
+4. **Training note** — public domain; use `media/` image+`.txt` pairs or the URLs  
+
+Live catalog:  
+https://raw.githubusercontent.com/MurdochHarris/murdoch-in-the-machine-dataset/main/manifest.json
 
 ---
 
 ## ChatGPT (Custom GPT)
 
-1. Open [ChatGPT](https://chatgpt.com) → **Explore GPTs** → **Create** (or **My GPTs** → **Create a GPT**).
-2. **Configure** tab:
-   - **Name:** `Murdoch in the Machine`
-   - **Description:** Public-domain Murdoch image dataset assistant — captions, labels, raw image URLs for training and reference.
-   - **Instructions:** paste entire contents of [`chatgpt/INSTRUCTIONS.md`](chatgpt/INSTRUCTIONS.md).
-   - **Conversation starters:** copy lines from [`chatgpt/CONVERSATION_STARTERS.md`](chatgpt/CONVERSATION_STARTERS.md).
-   - **Knowledge:** upload:
-     - `shared/KNOWLEDGE.md` (required)
-     - `shared/manifest.json` (optional, helpful)
-   - **Capabilities:** enable **Browsing** if available so the GPT can refresh from GitHub raw URLs when knowledge is stale.
-3. Create → save as only you / anyone with link / public (your choice).
-
-No paid API key is required for a basic knowledge GPT. Actions/OpenAPI are optional later.
+1. **Create a GPT** → Configure  
+2. **Name:** Murdoch Likeness / Murdoch in the Machine  
+3. **Description:** Public-domain Murdoch reference plates + prompts for consistent AI likeness and character training.  
+4. **Instructions:** paste [`chatgpt/INSTRUCTIONS.md`](chatgpt/INSTRUCTIONS.md)  
+5. **Conversation starters:** [`chatgpt/CONVERSATION_STARTERS.md`](chatgpt/CONVERSATION_STARTERS.md)  
+6. **Knowledge:** upload `shared/KNOWLEDGE.md` (optional: `shared/manifest.json`)  
+7. Enable **Browsing** if you want live manifest refresh  
 
 ---
 
 ## Gemini (Gem)
 
-1. Open [Gemini](https://gemini.google.com) → **Gem manager** / **Explore Gems** → **New Gem** (wording varies by account).
-2. **Name:** `Murdoch in the Machine`
-3. **Instructions:** paste [`gemini/GEM_INSTRUCTIONS.md`](gemini/GEM_INSTRUCTIONS.md).
-4. **Knowledge / files:** upload `shared/KNOWLEDGE.md` (and optionally `shared/manifest.json`).
-5. Save the Gem and start a chat with it.
-
-If your Gemini client only allows one knowledge file, use `KNOWLEDGE.md` alone.
+1. New Gem  
+2. **Instructions:** paste [`gemini/GEM_INSTRUCTIONS.md`](gemini/GEM_INSTRUCTIONS.md)  
+3. **Files:** upload `shared/KNOWLEDGE.md`  
 
 ---
 
 ## Grok (Skill)
-
-### Option A — Grok Build / local agent skill
-
-Copy the skill into your user skills directory:
 
 ```bash
 mkdir -p ~/.grok/skills/murdoch-dataset
 cp ai-assistants/grok/SKILL.md ~/.grok/skills/murdoch-dataset/SKILL.md
 ```
 
-Or keep a project skill:
+Trigger: `/murdoch-dataset`, `/murdoch`, or “generate Murdoch consistently / likeness refs”.
 
-```bash
-mkdir -p .grok/skills/murdoch-dataset
-cp ai-assistants/grok/SKILL.md .grok/skills/murdoch-dataset/SKILL.md
-```
-
-Then run `/murdoch-dataset` or ask in natural language for Murdoch reference plates.
-
-### Option B — Paste as custom instructions
-
-If you only have a chat UI with “custom instructions,” paste the body of `grok/SKILL.md` (below the frontmatter) into that box and attach/link `shared/KNOWLEDGE.md` if the product allows files.
+The skill fetches the **live** `manifest.json` so it stays current after you push new plates.
 
 ---
 
-## What users should get back
+## Tip for image tools
 
-A good answer always includes:
-
-1. Plate title  
-2. Short caption / why it matches  
-3. Raw image URL (`raw.githubusercontent.com/...`)  
-4. License note when relevant (public domain media)
-
-Live manifest (always current after you push):
-
-https://raw.githubusercontent.com/MurdochHarris/murdoch-in-the-machine-dataset/main/manifest.json
+| Workflow | How to use this pack |
+|----------|----------------------|
+| Text-to-image | Paste identity prompt; attach 1–4 reference URLs if the tool allows |
+| Img2img / IP-Adapter | Use face-lock plate URLs as references; keep identity weight high |
+| LoRA / fine-tune | Download diverse `media/*` pairs or URLs from the likeness kit |
