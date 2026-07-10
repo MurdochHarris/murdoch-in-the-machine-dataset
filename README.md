@@ -135,6 +135,26 @@ See [LICENSE](LICENSE) for the full text. Trademarks or third-party marks visibl
 
 ---
 
+## AI assistants (ChatGPT / Gemini / Grok)
+
+Ready-to-upload packs live in [`ai-assistants/`](ai-assistants/):
+
+| Platform | What to use |
+|----------|-------------|
+| **ChatGPT** Custom GPT | `ai-assistants/chatgpt/INSTRUCTIONS.md` + upload `shared/KNOWLEDGE.md` |
+| **Gemini** Gem | `ai-assistants/gemini/GEM_INSTRUCTIONS.md` + upload `shared/KNOWLEDGE.md` |
+| **Grok** skill | copy `ai-assistants/grok/SKILL.md` → `~/.grok/skills/murdoch-dataset/` |
+
+Regenerate knowledge after new plates:
+
+```bash
+python3 ai-assistants/build_knowledge.py
+```
+
+See [ai-assistants/README.md](ai-assistants/README.md) for step-by-step upload instructions.
+
+---
+
 ## Related
 
 - Editorial blog: https://murdochinthemachine.blogspot.com/
