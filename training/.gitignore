@@ -1,0 +1,3 @@
+# Generated trainer export (recreate with export_sd_dataset.py)
+sd-dataset/*
+!sd-dataset/.gitkeep

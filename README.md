@@ -135,6 +135,17 @@ See [LICENSE](LICENSE) for the full text. Trademarks or third-party marks visibl
 
 ---
 
+## Stable Diffusion / LoRA
+
+Train or reference Murdoch in SD, SDXL, Forge, ComfyUI, etc.:
+
+→ **[training/STABLE_DIFFUSION.md](training/STABLE_DIFFUSION.md)**
+
+```bash
+python3 training/export_sd_dataset.py --trigger murdoch --short
+# → training/sd-dataset/  (image + .txt pairs for kohya / OneTrainer / …)
+```
+
 ## AI assistants — recreate Murdoch’s likeness
 
 Packs in [`ai-assistants/`](ai-assistants/) turn this dataset into **likeness kits** (reference URLs + visual anchors + prompts) for consistent Murdoch generation and training:
